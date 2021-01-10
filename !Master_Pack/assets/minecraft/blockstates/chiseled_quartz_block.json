@@ -1,0 +1,9 @@
+{ 
+	"variants":{ 
+		"":[ 
+			{"model":"block/chiseled_quartz_block/0","weight":40}, 
+			{"model":"block/chiseled_quartz_block/1","weight":30}, 
+			{"model":"block/chiseled_quartz_block/2","weight":30}
+		] 
+	} 
+} 

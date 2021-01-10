@@ -1,0 +1,13 @@
+{
+   "pack": {
+      "pack_format": 6,
+      "description": "Master"
+   },
+   "language": {
+      "en_eq": {
+         "name": "English",
+         "region": "EpicQuestz",
+         "bidirectional": false
+      }
+   }
+}
