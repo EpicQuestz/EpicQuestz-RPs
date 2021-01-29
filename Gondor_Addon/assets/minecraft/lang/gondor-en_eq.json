@@ -49,5 +49,7 @@
   "block.minecraft.chiseled_quartz_bricks": "Small Quartz Bricks",
   "block.minecraft.smooth_quartz": "Polished Quartz",
   "block.minecraft.smooth_stone": "Polished Stone",
-  "block.minecraft.petrified_oak_slab": "Dirt Slab"
+  "block.minecraft.petrified_oak_slab": "Dirt Slab",
+  "block.minecraft.iron_block": "Mossy Quartz Bricks"
+  "block.minecraft.iron_ore": "Rusty Quartz Bricks"
 }
