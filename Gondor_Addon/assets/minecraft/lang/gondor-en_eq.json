@@ -50,6 +50,10 @@
   "block.minecraft.smooth_quartz": "Polished Quartz",
   "block.minecraft.smooth_stone": "Polished Stone",
   "block.minecraft.petrified_oak_slab": "Dirt Slab",
-  "block.minecraft.iron_block": "Mossy Quartz Bricks"
+  "block.minecraft.iron_block": "Mossy Quartz Bricks",
+  "block.minecraft.polished_blackstone": "Black Marble",
+  "block.minecraft.polished_blackstone_stair": "Black Marble Stairs",
+  "block.minecraft.polished_blackstone_slab": "Black Marble Slab",
+  "block.minecraft.polished_blackstone_wall": "Black Marble Wall",
   "block.minecraft.iron_ore": "Rusty Quartz Bricks"
 }
