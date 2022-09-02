@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "block/quartz_block_bottom_2",
+        "top": "block/quartz_block_top_2",
+        "side": "block/quartz_block_side_2"
+    }
+}
