@@ -1,0 +1,53 @@
+name: Build Eriador
+on:
+  push:
+    branches:
+      - refactor
+
+jobs:
+  bundle:
+    name: Bundle Pack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository & merge files
+        uses: actions/checkout@v3
+
+      - name: Merge files
+        run: |
+          cp -rf addon_eriador/. base/
+
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Replace variables
+        uses: datamonsters/replace-action@v2
+        with:
+          files: base/pack.mcmeta
+          replacements: '@commit@=${{ steps.vars.outputs.sha_short }}'
+
+      - name: Upload pack
+        uses: actions/upload-artifact@v3
+        with:
+          name: Eriador Pack
+          path: base
+          retention-days: 5
+
+#  packsquash:
+#    name: Optimize resource pack
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Download pack
+#          uses: actions/download-artifact@v3
+#          with:
+#            name: Eriador Pack
+#            # todo: check how to get unzipped files
+#
+#      - name: Run PackSquash
+#        uses: ComunidadAylas/PackSquash-action@v3
+#        with:
+#          options_file: 'packsquash.toml'
+#          # todo
+#
+#      # todo: upload optimized zip
