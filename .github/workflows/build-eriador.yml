@@ -86,3 +86,11 @@ jobs:
           localDir: ${{ steps.vars.outputs.pack_sha }}.zip
           remoteDir: ${{ secrets.DEPLOY_DIRECTORY }}
           dryRun: false
+
+      - name: Notify clients (send command)
+        uses: fjogeleit/http-request-action@v1.12.0
+        with:
+          url: ${{ secrets.PANEL_URL }}/api/client/servers/${{ secrets.SERVER_ID }}/command
+          method: POST
+          bearerToken: ${{ secrets.API_KEY }}
+          data: '{"command": "epicsuite packupdate eriador ${{ steps.vars.outputs.pack_sha }}"}'
