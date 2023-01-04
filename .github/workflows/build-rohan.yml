@@ -2,7 +2,7 @@ name: Build Rohan
 on:
   push:
     branches:
-      - refactor
+      - main
 
 jobs:
   bundle:

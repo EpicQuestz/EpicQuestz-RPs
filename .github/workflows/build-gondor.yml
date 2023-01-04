@@ -2,7 +2,7 @@ name: Build Gondor
 on:
   push:
     branches:
-      - refactor
+      - main
 
 jobs:
   bundle:

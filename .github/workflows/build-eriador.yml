@@ -2,7 +2,7 @@ name: Build Eriador
 on:
   push:
     branches:
-      - refactor
+      - main
 
 jobs:
   bundle:
