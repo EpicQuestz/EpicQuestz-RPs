@@ -56,3 +56,33 @@ jobs:
           path: base
           artifact_name: Squashed Eriador Pack
           recompress_compressed_files: true
+
+  deploy:
+    needs: packsquash
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download pack
+        uses: actions/download-artifact@v3
+        with:
+          name: Squashed Eriador Pack
+
+      - name: Calculate SHA1
+        id: vars
+        run: |
+          echo "pack_sha=$(openssl sha1 pack.zip | awk '{print $2}')" >> $GITHUB_OUTPUT
+
+      - name: Rename pack
+        run: |
+          mv pack.zip ${{ steps.vars.outputs.pack_sha }}.zip
+
+      - name: Upload pack via SSH
+        uses: wangyucode/sftp-upload-action@v1.4.8
+        with:
+          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          localDir: ${{ steps.vars.outputs.pack_sha }}.zip
+          remoteDir: ${{ secrets.DEPLOY_DIRECTORY }}
+          dryRun: false
