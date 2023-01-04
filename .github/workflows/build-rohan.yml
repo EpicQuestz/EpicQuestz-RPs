@@ -1,0 +1,96 @@
+name: Build Rohan
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bundle:
+    name: Bundle Pack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository & merge files
+        uses: actions/checkout@v3
+
+      - name: Merge files
+        run: |
+          cp -rf addon_rohan/. base/
+
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Replace variables
+        uses: datamonsters/replace-action@v2
+        with:
+          files: base/pack.mcmeta
+          replacements: '@commit@=${{ steps.vars.outputs.sha_short }}'
+
+      - name: Upload pack
+        uses: actions/upload-artifact@v3
+        with:
+          name: Rohan Pack
+          path: base
+          retention-days: 5
+
+  packsquash:
+    needs: bundle
+    name: Optimize Pack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # A non-shallow repository clone is required
+
+      - name: Download pack
+        uses: actions/download-artifact@v3
+        with:
+          name: Rohan Pack
+          path: base
+
+      - name: Run PackSquash
+        uses: ComunidadAylas/PackSquash-action@v3
+        with:
+          path: base
+          artifact_name: Squashed Rohan Pack
+          recompress_compressed_files: true
+
+  deploy:
+    needs: packsquash
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download pack
+        uses: actions/download-artifact@v3
+        with:
+          name: Squashed Rohan Pack
+
+      - name: Calculate SHA1
+        id: vars
+        run: |
+          echo "pack_sha=$(openssl sha1 pack.zip | awk '{print $2}')" >> $GITHUB_OUTPUT
+
+      - name: Rename pack
+        run: |
+          mv pack.zip ${{ steps.vars.outputs.pack_sha }}.zip
+
+      - name: Upload pack via SSH
+        uses: wangyucode/sftp-upload-action@v1.4.8
+        with:
+          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          localDir: ${{ steps.vars.outputs.pack_sha }}.zip
+          remoteDir: ${{ secrets.DEPLOY_DIRECTORY }}
+          dryRun: false
+
+      - name: Notify clients (send command)
+        uses: fjogeleit/http-request-action@v1.12.0
+        with:
+          url: ${{ secrets.PANEL_URL }}/api/client/servers/${{ secrets.SERVER_ID }}/command
+          method: POST
+          bearerToken: ${{ secrets.API_KEY }}
+          data: '{"command": "epicsuite packupdate rohan ${{ steps.vars.outputs.pack_sha }}"}'
