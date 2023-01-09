@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   bundle:
@@ -36,6 +37,7 @@ jobs:
 
   packsquash:
     needs: bundle
+    if: github.event_name != 'pull_request' # PRs only get preview builds
     name: Optimize Pack
     runs-on: ubuntu-latest
     steps:
@@ -59,6 +61,7 @@ jobs:
 
   deploy:
     needs: packsquash
+    if: github.event_name != 'pull_request' # PRs only get preview builds
     name: Deploy
     runs-on: ubuntu-latest
     steps:
