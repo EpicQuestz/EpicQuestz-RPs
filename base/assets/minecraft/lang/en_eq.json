@@ -36,10 +36,8 @@
 
   "block.minecraft.white_glazed_terracotta": "Key: Info",
   "block.minecraft.orange_glazed_terracotta": "Key: Edit",
-  "block.minecraft.magenta_glazed_terracotta": "Key: Interior Structure",
+  "block.minecraft.magenta_glazed_terracotta": "Key: Job",
   "block.minecraft.light_blue_glazed_terracotta": "Key: Done",
-  "block.minecraft.yellow_glazed_terracotta": "Key: Interior Decor",
-  "block.minecraft.lime_glazed_terracotta": "Key: Vegetation",
   "block.minecraft.light_gray_glazed_terracotta": "Key: WIP",
   "block.minecraft.green_glazed_terracotta": "Key: Approved",
   "block.minecraft.red_glazed_terracotta": "Key: Delete",
