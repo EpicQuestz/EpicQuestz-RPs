@@ -44,7 +44,9 @@
 
   "block.minecraft.nether_brick_wall": "Oak Log Wall",
   "block.minecraft.nether_brick_fence": "Oak Log Fence",
-  "block.minecraft.soul_soil": "Dirt (2)",
+  "block.minecraft.nether_brick_slab": "Oak Log Slab",
+  "block.minecraft.nether_brick_stairs": "Oak Log Stairs",
+  "block.minecraft.soul_soil": "Soil",
   "block.minecraft.grass_path": "Dirt Path",
   "block.minecraft.petrified_oak_slab": "Dirt Slab",
 }
