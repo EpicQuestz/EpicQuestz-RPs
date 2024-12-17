@@ -81,16 +81,26 @@ jobs:
         run: |
           mv pack.zip ${{ steps.vars.outputs.pack_sha }}.zip
 
-      - name: Upload pack via SSH
-        uses: wangyucode/sftp-upload-action@v2.0.4
-        with:
-          username: ${{ secrets.SSH_USERNAME }}
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
-          localDir: ${{ steps.vars.outputs.pack_sha }}.zip
-          remoteDir: ${{ secrets.DEPLOY_DIRECTORY }}
-          dryRun: false
+      - name: Create SSH directory
+        run: mkdir -p ~/.ssh
+        
+      - name: Add SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Install lftp
+        run: sudo apt update && sudo apt install -y lftp
+        
+      - name: Upload pack using lftp
+        run: |
+          lftp -e "
+            set ssl:verify-certificate no;
+            set sftp:auto-confirm yes;
+            open -u ${{ secrets.SSH_USERNAME }}, sftp://${{ secrets.SSH_HOST }}:${{ secrets.SSH_PORT }};
+            put ${{ steps.vars.outputs.pack_sha }}.zip -o ${{ secrets.DEPLOY_DIRECTORY }}/${{ steps.vars.outputs.pack_sha }}.zip;
+            bye
+          "
 
       - name: Notify clients (send command)
         uses: fjogeleit/http-request-action@v1.16.4
