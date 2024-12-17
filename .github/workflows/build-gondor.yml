@@ -55,9 +55,11 @@ jobs:
       - name: Run PackSquash
         uses: ComunidadAylas/PackSquash-action@v4
         with:
-          path: base
+          packsquash_version: latest
           artifact_name: Squashed Gondor Pack
-          recompress_compressed_files: true
+          options: |
+            pack_directory = 'base'
+            recompress_compressed_files = true
 
   deploy:
     needs: packsquash
