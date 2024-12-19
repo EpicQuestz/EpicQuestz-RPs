@@ -1,0 +1,66 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "minecraft:block/packed_mud/0"
+      },
+      {
+        "model": "minecraft:block/packed_mud/1"
+      },
+      {
+        "model": "minecraft:block/packed_mud/2"
+      },
+      {
+        "model": "minecraft:block/packed_mud/3"
+      },
+      {
+        "model": "minecraft:block/packed_mud/0",
+        "y": 90
+      },
+      {
+        "model": "minecraft:block/packed_mud/1",
+        "y": 90
+      },
+      {
+        "model": "minecraft:block/packed_mud/2",
+        "y": 90
+      },
+      {
+        "model": "minecraft:block/packed_mud/3",
+        "y": 90
+      },
+      {
+        "model": "minecraft:block/packed_mud/0",
+        "y": 180
+      },
+      {
+        "model": "minecraft:block/packed_mud/1",
+        "y": 180
+      },
+      {
+        "model": "minecraft:block/packed_mud/2",
+        "y": 180
+      },
+      {
+        "model": "minecraft:block/packed_mud/3",
+        "y": 180
+      },
+      {
+        "model": "minecraft:block/packed_mud/0",
+        "y": 270
+      },
+      {
+        "model": "minecraft:block/packed_mud/1",
+        "y": 270
+      },
+      {
+        "model": "minecraft:block/packed_mud/2",
+        "y": 270
+      },
+      {
+        "model": "minecraft:block/packed_mud/3",
+        "y": 270
+      }
+    ]
+  }
+}
