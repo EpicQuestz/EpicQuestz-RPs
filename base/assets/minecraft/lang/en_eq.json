@@ -48,5 +48,12 @@
   "block.minecraft.nether_brick_stairs": "Oak Log Stairs",
   "block.minecraft.soul_soil": "Soil",
   "block.minecraft.grass_path": "Dirt Path",
-  "block.minecraft.petrified_oak_slab": "Dirt Slab"
+  "block.minecraft.petrified_oak_slab": "Dirt Slab",
+  
+  "block.minecraft.exposed_cut_copper": "Large Mud Bricks",
+  "block.minecraft.exposed_cut_copper_slab": "Large Mud Brick Slab",
+  "block.minecraft.exposed_cut_copper_stairs": "Large Mud Brick Stairs",
+  
+  "block.minecraft.exposed_chiseled_copper": "Chiseled Mud Bricks",
+  "block.minecraft.exposed_copper": "Smooth Mud Brick"
 }

@@ -1,0 +1,10 @@
+{ 
+	"variants":{ 
+		"":[ 
+			{"model":"block/mud_bricks/0","weight":25}, 
+			{"model":"block/mud_bricks/1","weight":25},
+			{"model":"block/mud_bricks/2","weight":25},
+			{"model":"block/mud_bricks/3","weight":25}
+		] 
+	} 
+} 
