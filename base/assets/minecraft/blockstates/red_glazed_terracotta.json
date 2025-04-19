@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "block/red_glazed_terracotta" }
+        "": { "model": "block/key_blocks/delete" }
     }
 }
