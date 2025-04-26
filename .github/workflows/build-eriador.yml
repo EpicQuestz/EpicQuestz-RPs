@@ -82,7 +82,8 @@ jobs:
           mv pack.zip ${{ steps.vars.outputs.pack_sha }}.zip
 
       - name: Create SSH directory
-        run: mkdir -p ~/.ssh
+        run: |
+          mkdir -p ~/.ssh
         
       - name: Add SSH key
         run: |
