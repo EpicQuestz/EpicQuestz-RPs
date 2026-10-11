@@ -1,4 +1,4 @@
-name: Build Gondor
+name: Build Packs
 on:
   push:
     branches:
@@ -7,19 +7,31 @@ on:
 
 jobs:
   bundle:
-    name: Bundle Pack
+    name: Bundle ${{ matrix.region }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        region: [eriador, gondor, rohan]
     steps:
-      - name: Clone repository & merge files
+      - name: Clone repository
         uses: actions/checkout@v4
 
       - name: Merge files
         run: |
-          # Minecraft only reads lang/en_eq.json, so merge the Gondor name overrides into the base one
-          jq -s '.[0] * .[1]' base/assets/minecraft/lang/en_eq.json addon_gondor/assets/minecraft/lang/gondor-en_eq.json > "$RUNNER_TEMP/en_eq.json"
-          cp -rf addon_gondor/. base/
-          rm base/assets/minecraft/lang/gondor-en_eq.json
-          mv "$RUNNER_TEMP/en_eq.json" base/assets/minecraft/lang/en_eq.json
+          addon=addon_${{ matrix.region }}
+          lang=assets/minecraft/lang/en_eq.json
+          # A pack replaces lang files wholesale, so merge addon names into the base ones instead of overwriting
+          if [ -f "$addon/$lang" ]; then
+            jq -s '.[0] * .[1]' "base/$lang" "$addon/$lang" > "$RUNNER_TEMP/en_eq.json"
+          fi
+          cp -rf "$addon/." base/
+          if [ -f "$RUNNER_TEMP/en_eq.json" ]; then
+            mv "$RUNNER_TEMP/en_eq.json" "base/$lang"
+          fi
+
+      - name: Validate pack
+        run: python3 .github/validate.py base
 
       - name: Set short git commit SHA
         id: vars
@@ -35,15 +47,19 @@ jobs:
       - name: Upload pack
         uses: actions/upload-artifact@v4
         with:
-          name: Gondor Pack
+          name: ${{ matrix.region }}-pack
           path: base
           retention-days: 5
 
   packsquash:
     needs: bundle
     if: github.event_name != 'pull_request' # PRs only get preview builds
-    name: Optimize Pack
+    name: Optimize ${{ matrix.region }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        region: [eriador, gondor, rohan]
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
@@ -53,14 +69,14 @@ jobs:
       - name: Download pack
         uses: actions/download-artifact@v4
         with:
-          name: Gondor Pack
+          name: ${{ matrix.region }}-pack
           path: base
 
       - name: Run PackSquash
         uses: ComunidadAylas/PackSquash-action@v4
         with:
           packsquash_version: latest
-          artifact_name: Squashed Gondor Pack
+          artifact_name: ${{ matrix.region }}-pack-squashed
           options: |
             pack_directory = 'base'
             recompress_compressed_files = true
@@ -68,13 +84,17 @@ jobs:
   deploy:
     needs: packsquash
     if: github.event_name != 'pull_request' # PRs only get preview builds
-    name: Deploy
+    name: Deploy ${{ matrix.region }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        region: [eriador, gondor, rohan]
     steps:
       - name: Download pack
         uses: actions/download-artifact@v4
         with:
-          name: Squashed Gondor Pack
+          name: ${{ matrix.region }}-pack-squashed
 
       - name: Calculate SHA1
         id: vars
@@ -85,22 +105,18 @@ jobs:
         run: |
           mv pack.zip ${{ steps.vars.outputs.pack_sha }}.zip
 
-      - name: Create SSH directory
-        run: |
-          mkdir -p ~/.ssh
-        
       - name: Add SSH key
         run: |
+          mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
 
       - name: Install lftp
         run: sudo apt update && sudo apt install -y lftp
-        
+
       - name: Upload pack using lftp
         run: |
           lftp -e "
-            set ssl:verify-certificate no;
             set sftp:auto-confirm yes;
             open -u ${{ secrets.SSH_USERNAME }}, sftp://${{ secrets.SSH_HOST }}:${{ secrets.SSH_PORT }};
             put ${{ steps.vars.outputs.pack_sha }}.zip -o ${{ secrets.DEPLOY_DIRECTORY }}/${{ steps.vars.outputs.pack_sha }}.zip;
@@ -113,4 +129,4 @@ jobs:
           url: ${{ secrets.PANEL_URL }}/api/client/servers/${{ secrets.SERVER_ID }}/command
           method: POST
           bearerToken: ${{ secrets.API_KEY }}
-          data: '{"command": "epicsuite packupdate gondor ${{ steps.vars.outputs.pack_sha }}"}'
+          data: '{"command": "epicsuite packupdate ${{ matrix.region }} ${{ steps.vars.outputs.pack_sha }}"}'
