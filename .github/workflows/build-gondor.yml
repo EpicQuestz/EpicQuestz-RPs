@@ -15,7 +15,11 @@ jobs:
 
       - name: Merge files
         run: |
+          # Minecraft only reads lang/en_eq.json, so merge the Gondor name overrides into the base one
+          jq -s '.[0] * .[1]' base/assets/minecraft/lang/en_eq.json addon_gondor/assets/minecraft/lang/gondor-en_eq.json > "$RUNNER_TEMP/en_eq.json"
           cp -rf addon_gondor/. base/
+          rm base/assets/minecraft/lang/gondor-en_eq.json
+          mv "$RUNNER_TEMP/en_eq.json" base/assets/minecraft/lang/en_eq.json
 
       - name: Set short git commit SHA
         id: vars
