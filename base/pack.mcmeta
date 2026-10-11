@@ -1,6 +1,7 @@
 {
    "pack": {
-      "pack_format": 61,
+      "min_format": 97,
+      "max_format": 97,
       "description": "EpicQuestz Base Pack | @commit@"
    },
    "language": {
