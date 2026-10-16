@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "minecraft:block/chiseled_tuff/0",
+        "weight": 20
+      },
+      {
+        "model": "minecraft:block/chiseled_tuff/1",
+        "weight": 20
+      },
+      {
+        "model": "minecraft:block/chiseled_tuff/2",
+        "weight": 20
+      },
+      {
+        "model": "minecraft:block/chiseled_tuff/3",
+        "weight": 20
+      },
+      {
+        "model": "minecraft:block/chiseled_tuff/4",
+        "weight": 20
+      }
+    ]
+  }
+}
