@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/sandstone_slab"
+    },
+    "type=top": {
+      "model": "minecraft:block/sandstone_slab_top"
+    },
+    "type=double": [
+      {
+        "model": "minecraft:block/sandstone/weathered_0",
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/sandstone/weathered_1",
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/sandstone/weathered_2",
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/sandstone/weathered_3",
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/sandstone/weathered_4",
+        "weight": 1
+      }
+    ]
+  }
+}

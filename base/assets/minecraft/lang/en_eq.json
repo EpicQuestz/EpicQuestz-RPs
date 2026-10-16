@@ -2,6 +2,8 @@
   "block.minecraft.birch_door": "Blue Door",
   "block.minecraft.birch_trapdoor": "Blue Shutter",
   "block.minecraft.acacia_trapdoor": "Green Shutter",
+  "block.minecraft.cherry_trapdoor": "Ochre Shutter",
+  "block.minecraft.pale_oak_trapdoor": "Pale Blue Shutter",
 
   "block.minecraft.chiseled_quartz_block": "Small Quartz Bricks",
   "block.minecraft.quartz_bricks": "Narrow Quartz Bricks",
@@ -52,5 +54,24 @@
   "block.minecraft.exposed_cut_copper_stairs": "Large Mud Brick Stairs",
   
   "block.minecraft.exposed_chiseled_copper": "Chiseled Mud Bricks",
-  "block.minecraft.exposed_copper": "Smooth Mud Brick"
+  "block.minecraft.exposed_copper": "Smooth Mud Brick",
+
+  "block.minecraft.red_sandstone": "Sandstone Cobblestone",
+  "block.minecraft.red_sandstone_slab": "Sandstone Cobblestone Slab",
+  "block.minecraft.red_sandstone_stairs": "Sandstone Cobblestone Stairs",
+  "block.minecraft.red_sandstone_wall": "Sandstone Cobblestone Wall",
+  "block.minecraft.sandstone": "Sandstone Bricks",
+  "block.minecraft.sandstone_slab": "Sandstone Brick Slab",
+  "block.minecraft.sandstone_stairs": "Sandstone Brick Stairs",
+  "block.minecraft.sandstone_wall": "Sandstone Brick Wall",
+  "block.minecraft.chiseled_sandstone": "Cracked Sandstone Bricks",
+  "block.minecraft.cut_sandstone": "Sandstone",
+  "block.minecraft.cut_sandstone_slab": "Sandstone Slab",
+  "block.minecraft.chiseled_red_sandstone": "Small Sandstone Bricks",
+  "block.minecraft.crimson_stem": "Sandstone Pillar",
+  "block.minecraft.tuff_bricks": "Dirty Cobblestone",
+  "block.minecraft.tuff_brick_slab": "Dirty Cobblestone Slab",
+  "block.minecraft.tuff_brick_stairs": "Dirty Cobblestone Stairs",
+  "block.minecraft.tuff_brick_wall": "Dirty Cobblestone Wall",
+  "block.minecraft.chiseled_tuff": "Muddy Cobblestone"
 }
