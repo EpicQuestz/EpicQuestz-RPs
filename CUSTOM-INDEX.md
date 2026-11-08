@@ -21,6 +21,8 @@
 - packed_mud (random variants)
 - petrified_oak_slab `"Dirt Slab"`
 - polished_andesite_slab, polished_diorite_slab, polished_granite_slab, polished_tuff_slab (custom double slab)
+- quartz_slab (custom double slab `"Mossy Quartz Bricks"`, random variants)
+- smooth_quartz_slab (custom double slab `"Rusted Quartz Bricks"`, random variants)
 - quartz_block `"Quartz Bricks"` (random variants)
 - red_nether_brick_wall `"Quartz Pillar Wall"`
 - smooth_quartz `"Polished Quartz"`
@@ -39,36 +41,8 @@
 - red `"Key: Delete"`
 
 ## without custom models
+- pale_oak_trapdoor `"Quartz Trapdoor"`
 - everything else in `base/assets/minecraft/textures`; renamed ones are listed in `base/assets/minecraft/lang/en_eq.json`
 
-# addon_gondor
-
-## with custom models
-- iron_block `"Mossy Quartz Bricks"`
-- iron_ore `"Rusted Quartz Bricks"`
-
-## without custom models
-- iron_trapdoor `"Quartz Trapdoor"`
-- mushroom_stem
-- polished_blackstone
-
-# addon_eriador
-
-## with custom models
-- N/A
-
-## without custom models
-- coarse_dirt
-- dirt
-- grass_block_side
-- grass_block_side_overlay
-- grass_block_snow
-- grass_block_top
-
-# addon_rohan
-
-## with custom models
-- N/A
-
-## without custom models
-- N/A
+# addon_gondor, addon_eriador, addon_rohan
+- empty (pack.mcmeta only) since the consolidation into one pack; all custom content lives in `base`.
