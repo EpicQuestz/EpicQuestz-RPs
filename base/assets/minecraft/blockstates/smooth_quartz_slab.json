@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "type=bottom": { "model": "block/smooth_quartz_slab" },
+        "type=top": { "model": "block/smooth_quartz_slab_top" },
+        "type=double": [
+            { "model": "block/smooth_quartz_double_slab/0", "weight": 30 },
+            { "model": "block/smooth_quartz_double_slab/1", "weight": 30 },
+            { "model": "block/smooth_quartz_double_slab/2", "weight": 25 },
+            { "model": "block/smooth_quartz_double_slab/3", "weight": 15 }
+        ]
+    }
+}
